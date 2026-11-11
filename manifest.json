@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Stripchat Goal Automation Assistant",
+  "version": "1.2",
+  "description": "Автоматическая смена целей с Floating UI и управлением из панели",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_title": "Показать / скрыть панель бота",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.stripchat.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

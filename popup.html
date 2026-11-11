@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goal Bot Popup</title>
+    <style>
+      body {
+        width: 320px;
+        margin: 0;
+        background: #0f172a;
+        color: #f3f4f6;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      .wrap {
+        padding: 14px;
+      }
+      h2 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+      .btn {
+        display: block;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-top: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        color: white;
+      }
+      .primary { background: #2563eb; }
+      .secondary { background: #374151; }
+      .danger { background: #dc2626; }
+      .muted {
+        color: #9ca3af;
+        font-size: 12px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h2>Goal Bot</h2>
+      <button id="toggle-panel" class="btn primary">Показать/скрыть панель</button>
+      <button id="open-settings" class="btn secondary">Настройки целей</button>
+      <button id="toggle-active" class="btn danger">Старт / Стоп</button>
+      <div id="status" class="muted">Готово</div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

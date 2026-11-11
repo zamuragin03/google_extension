@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goal Bot Settings</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --border: #374151;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --primary: #3b82f6;
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 18px 32px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: 28px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    textarea,
+    input {
+      width: 100%;
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      line-height: 1.5;
+      tab-size: 2;
+    }
+
+    .json-editor {
+      background: #0a1220;
+      border: 1px solid #475569;
+      box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+      min-height: 350px;
+      width: 100%;
+      display: block;
+    }
+
+    .json-editor:focus {
+      outline: none;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.22);
+    }
+
+    .json-editor.error {
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15);
+    }
+
+    .input-error {
+      min-height: 18px;
+      margin-top: 8px;
+      color: #fca5a5;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .example-box {
+      margin: 0;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--muted);
+      white-space: pre-wrap;
+      font-size: 12px;
+    }
+
+    .editor-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .format-note {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .goal-grid {
+      display: flex;
+      width: 100%;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .list-block {
+      display: flex;
+      width: 100%;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      flex-direction: column;
+    }
+
+    .small {
+      font-size: 12px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: white;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+    }
+
+    .btn-secondary {
+      background: #374151;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+    }
+
+    .status {
+      margin-top: 14px;
+      min-height: 20px;
+      font-size: 13px;
+      color: var(--success);
+    }
+
+    @media (max-width: 720px) {
+      .goal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Настройки Goal Bot</h1>
+      <div class="muted small">Редактируйте цели и соответствующие им видео прямо здесь. Изменения сохраняются в
+        хранилище браузера и будут использоваться автоматически на Stripchat.</div>
+    </div>
+
+    <div class="card">
+      <h2>Цели и суммы</h2>
+      <div class="goal-grid">
+        <div class="list-block">
+          <div class="row" style="margin-bottom: 10px;">
+            <strong>Формат</strong>
+            <span class="muted small">Название цели = сумма токенов</span>
+          </div>
+          <div class="editor-stack">
+            <textarea id="goals-json" spellcheck="false" aria-label="JSON goals" class="json-editor"></textarea>
+            <div id="goals-error" class="input-error" aria-live="polite"></div>
+            <pre class="example-box">{
+  "LAST TIPPER WIN CHEATING GANGBANG VIDEO": 55,
+  "LAST TIPPER WIN 2 ANAL PLAY+CUMSHOT VIDS": 44
+}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Видео для каждой цели</h2>
+      <div class="goal-grid">
+        <div class="list-block">
+          <div class="row" style="margin-bottom: 10px;">
+            <strong>Формат</strong>
+            <span class="muted small">Название цели = массив видео</span>
+          </div>
+          <div class="editor-stack">
+            <textarea id="titles-json" class="json-editor" spellcheck="false" aria-label="JSON video titles"></textarea>
+            <div id="titles-error" class="input-error" aria-live="polite"></div>
+            <pre class="example-box">{
+  "LAST TIPPER WIN CHEATING GANGBANG VIDEO": [
+    "💔👩‍❤️‍💋‍👨 CHEATING SLUT GANGBANGED(2 dicks in mouth)",
+    "PUSSY TEASING + ROUGH FUCK"
+  ]
+}</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="actions">
+        <button id="save-btn" class="btn-primary">Сохранить</button>
+        <button id="autofix-btn" class="btn-secondary">Автоисправить JSON</button>
+        <button id="reset-btn" class="btn-secondary">Сбросить по умолчанию</button>
+      </div>
+      <div id="status" class="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+
+</html>
